@@ -1,0 +1,21 @@
+# Compiled Java files
+*.class
+out/
+
+# IDE
+.idea/
+
+# SDK and Dependencies (large files)
+javafx-sdk-17.0.17/
+mysql-connector-java-8.0.24.jar
+
+# macOS
+.DS_Store
+
+# Build
+build/
+dist/
+
+# Database
+*.db
+*.log
