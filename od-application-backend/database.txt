@@ -1,0 +1,42 @@
+CREATE DATABASE gym_booking;
+USE gym_booking;
+
+
+-- Users table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,  -- Store hashed passwords in production
+    email VARCHAR(100) UNIQUE NOT NULL,
+    full_name VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Gyms table (sample gyms)
+CREATE TABLE gyms (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    location VARCHAR(100),
+    description TEXT,
+    capacity INT DEFAULT 50
+);
+
+-- Bookings table
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    gym_id INT NOT NULL,
+    booking_date DATE NOT NULL,
+    time_slot VARCHAR(50) NOT NULL,  -- e.g., 'Morning', 'Evening'
+    status ENUM('Confirmed', 'Cancelled') DEFAULT 'Confirmed',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (gym_id) REFERENCES gyms(id)
+);
+
+
+
+INSERT INTO gyms (name, location, description) VALUES
+('FitHub Central', 'Downtown', 'Modern gym with cardio and weights'),
+('PowerLift Gym', 'Suburbs', 'Strength training focused'),
+('YogaZone', 'City Center', 'Yoga and wellness classes');
